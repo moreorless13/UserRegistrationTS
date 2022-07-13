@@ -22,6 +22,7 @@ export const ServiceTypeDefs = gql`
         me: User
         user: User
         users: [User]
+        verifyUser(userId: ID!): User
     }
 
     type Mutation {

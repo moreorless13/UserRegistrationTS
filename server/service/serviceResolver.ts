@@ -78,7 +78,11 @@ const ServiceResolvers = {
             } else {
                 throw new AuthenticationError('You are not authorized to view this account');
             }
-        }
+        },
+        verifyUser: async (parent: unknown, { userId }: any) => {
+            const user = await User.findByIdAndUpdate({ _id: userId }, { $set: { accountStatus: 'Active' } }, { new: true });
+            return user;
+        },
     }, 
     Mutation: {
         addUser: async (parent: unknown, { username, email, password, dateOfBirth }: any) => {
