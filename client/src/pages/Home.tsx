@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Auth from '../utils/auth';
 import SignupForm from '../components/forms/SignUp';
 import LoginForm from '../components/forms/Login';
+import DeleteAccount from '../components/forms/DeleteAccount';
 
 const HomePage = () => {
     const [form, setForm] = useState('SignUp')
@@ -13,6 +14,7 @@ const HomePage = () => {
                 <h1>
                     Welcome back, {username}
                 </h1>
+                <DeleteAccount />
             </div>
         )
     } else {
