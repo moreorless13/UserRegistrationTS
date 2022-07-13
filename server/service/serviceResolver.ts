@@ -85,13 +85,13 @@ const ServiceResolvers = {
         },
     }, 
     Mutation: {
-        addUser: async (parent: unknown, { username, email, password, dateOfBirth }: any) => {
+        addUser: async (parent: unknown, { username, email, password }: any) => {
             try {
                 const existingUser = await User.findOne({ username } || { email });
                 if (existingUser) {
                     throw new AuthenticationError('User already exists')
                 } else {
-                    const newUser = await User.create({ username, email, password, dateOfBirth });
+                    const newUser = await User.create({ username, email, password });
                     sendConfirmationEmail(username, email, newUser._id);
                     return newUser
                 }
