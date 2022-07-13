@@ -1,6 +1,9 @@
 import { gql } from 'apollo-server-express';
 
 export const ServiceTypeDefs = gql`
+    scalar Date
+    scalar ObjectId
+
     type User {
         _id: ID
         username: String!

@@ -51,7 +51,8 @@ const ServiceResolvers = {
     ObjectId: ObjectIdScalar,
     Query: {
         users: async (parent: unknown, args: any, context: any) => {
-            if (!context.user || !context.user.roles.includes('Admin')) return null;
+            console.log(context.user.data.role)
+            if (!context.user || !(context.user.data.role === "Admin")) return null;
             try {
                 return await User.find()
             } catch (error) {
@@ -87,7 +88,7 @@ const ServiceResolvers = {
                     throw new AuthenticationError('User already exists')
                 } else {
                     const newUser = await User.create({ username, email, password, dateOfBirth });
-                    sendConfirmationEmail(username, email, newUser._id);
+                    // sendConfirmationEmail(username, email, newUser._id);
                     return newUser
                 }
             } catch (error) {
@@ -97,9 +98,9 @@ const ServiceResolvers = {
         login: async (parent: unknown, { username, password }: any) => {
             try {
                 const user = await User.findOne({ username });
-                if (user?.accountStatus !== 'Active') {
-                    throw new AuthenticationError('Please check your email for account confirmation.')
-                }
+                // if (user?.accountStatus !== 'Active') {
+                //     throw new AuthenticationError('Please check your email for account confirmation.')
+                // }
                 if (!user) {
                     throw new AuthenticationError('User does not exist')
                 } else {

@@ -26,12 +26,9 @@ export const authMiddleware = async ({ req }: any) => {
     return req;
 };
 
-export const signToken = ({ username, email, _id }: any) => {
-    const payload = { username, email, _id };
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration })
-};
 
-export const authorizedUser = ({ username, email, _id, role}: any) => {
+
+export const signToken = ({ username, email, _id, role}: any) => {
     const payload = { username, email, _id, role};
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration })
 }
