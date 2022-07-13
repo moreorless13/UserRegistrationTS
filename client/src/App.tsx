@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import HomePage from './pages/Home';
 const cookies = new Cookies();
 
 const httpLink = createHttpLink({
@@ -30,6 +31,9 @@ const App = () => {
     <ApolloProvider client={client}>
       <Router>
         <div className='container-fluid'>
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+          </Switch>
 
         </div>
       </Router>

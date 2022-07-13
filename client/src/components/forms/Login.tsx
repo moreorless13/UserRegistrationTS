@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
-const LoginForm = () => {
+const LoginForm = ({ form, handleFormChange }: any) => {
     const [userFormData, setUserFormData] = useState({ username: '', password: '' });
     const [validated, setValidated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
@@ -76,7 +76,7 @@ const LoginForm = () => {
                 <br />
             </Form>
             <br />
-            <Link to="/signup"> Sign up</Link>
+            <Button variant='dark' onClick={() => handleFormChange('SignUp')}>SignUp Form</Button>
         </div>
     );
 }

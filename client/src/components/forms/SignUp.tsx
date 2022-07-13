@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 
-const SignupForm = () => {
+const SignupForm = ({ form, handleFormChange }: any) => {
     const [userFormData, setUserFormData] = useState({
         username: '',
         email: '',
@@ -117,7 +117,7 @@ const SignupForm = () => {
             </Form>
             <br />
             <div className='row justify-content-center'>
-                <Link to="/login">← Go to Login</Link>
+                <Button variant='dark' onClick={() => handleFormChange('Login')} >Login Form</Button>
                 <br />
             </div>
         </div>
