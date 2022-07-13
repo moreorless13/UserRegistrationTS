@@ -1,0 +1,32 @@
+{
+  "name": "userregistrationts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc --watch",
+    "start": "ts-node server/server.ts",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moreorless13/UserRegistrationTS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moreorless13/UserRegistrationTS/issues"
+  },
+  "homepage": "https://github.com/moreorless13/UserRegistrationTS#readme",
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "concurrently": "^7.2.2",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}
