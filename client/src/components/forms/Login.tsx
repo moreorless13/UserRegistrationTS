@@ -3,6 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 const LoginForm = ({ form, handleFormChange }: any) => {
     const [userFormData, setUserFormData] = useState({ username: '', password: '' });
@@ -73,6 +74,9 @@ const LoginForm = ({ form, handleFormChange }: any) => {
                     <Button  className='padding bg-dark rounded justify-content-center' disabled={!(userFormData.username && userFormData.password)} type='submit' variant='success'>Submit</Button>
                 </div>
                 <br />
+                <div className='row justify-content-center'>
+                    <ForgotPasswordForm />
+                </div>
             </Form>
             <br />
             <Button variant='dark' onClick={() => handleFormChange('SignUp')}>SignUp Form</Button>

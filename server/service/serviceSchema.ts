@@ -29,5 +29,7 @@ export const ServiceTypeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         login(username: String!, password: String!): Auth
         removeUser(username: String!, email: String!, password: String!): User
+        updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmationPassword: String!): User
+        forgotPassword(email: String!): User
     }
 `

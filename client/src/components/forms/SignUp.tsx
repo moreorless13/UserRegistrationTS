@@ -2,6 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 const SignupForm = ({ form, handleFormChange }: any) => {
     const [userFormData, setUserFormData] = useState({
@@ -118,6 +119,9 @@ const SignupForm = ({ form, handleFormChange }: any) => {
             <div className='row justify-content-center'>
                 <Button variant='dark' onClick={() => handleFormChange('Login')} >Login Form</Button>
                 <br />
+            </div>
+            <div className='row justify-content-center'>
+                <ForgotPasswordForm />
             </div>
         </div>
     )

@@ -92,7 +92,7 @@ const ServiceResolvers = {
                     throw new AuthenticationError('User already exists')
                 } else {
                     const newUser = await User.create({ username, email, password, dateOfBirth });
-                    // sendConfirmationEmail(username, email, newUser._id);
+                    sendConfirmationEmail(username, email, newUser._id);
                     return newUser
                 }
             } catch (error) {
@@ -102,9 +102,9 @@ const ServiceResolvers = {
         login: async (parent: unknown, { username, password }: any) => {
             try {
                 const user = await User.findOne({ username });
-                // if (user?.accountStatus !== 'Active') {
-                //     throw new AuthenticationError('Please check your email for account confirmation.')
-                // }
+                if (user?.accountStatus !== 'Active') {
+                    throw new AuthenticationError('Please check your email for account confirmation.')
+                }
                 if (!user) {
                     throw new AuthenticationError('User does not exist')
                 } else {
@@ -132,6 +132,38 @@ const ServiceResolvers = {
                 }
             } catch (error) {
                 console.error(error)
+            }
+        },
+        updatePassword: async (parent: unknown, { userId, oldPassword, newPassword, confirmationPassword }: any, context: any) => {
+            try {
+               if (newPassword !== confirmationPassword) {
+                    throw new AuthenticationError('Passwords must match!')
+                }
+                const user = await User.findById({ _id: context.user.data._id });
+                if (!user) {
+                    throw new AuthenticationError('User does not exist')
+                } 
+                const correctPassword = user.isCorrectPassword(oldPassword)
+                if (!correctPassword) {
+                    throw new AuthenticationError('You must enter correct password!')
+                } else {
+                    user.password = newPassword;
+                    await user.save({ timestamps: true });
+                    return user
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        forgotPassword: async (parent: unknown, { email }: any) => {
+            try {
+                const user = await User.findOne({ email });
+                if (!user) {
+                    throw new AuthenticationError('User with that email does not exist')
+                }
+                sendForgotPasswordEmail(email, user._id)
+            } catch (error) {
+                console.error(error)  
             }
         },
     }
