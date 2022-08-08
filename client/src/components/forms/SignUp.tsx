@@ -35,11 +35,14 @@ const SignupForm = ({ form, handleFormChange }: any) => {
             event.preventDefault()
             event.stopPropagation()
         }
+        
 
         try {
+            console.log('am i trying')
             const { data } = await addUser({
                 variables: { ...userFormData },
             });
+            console.log(data)
             return data;
         } catch (error) {
             console.error(error)

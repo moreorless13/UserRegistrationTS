@@ -1,6 +1,8 @@
-import { gql } from 'apollo-server-express';
-
-export const ServiceTypeDefs = gql`
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceTypeDefs = void 0;
+const apollo_server_express_1 = require("apollo-server-express");
+exports.ServiceTypeDefs = (0, apollo_server_express_1.gql) `
     scalar Date
     scalar ObjectId
 
@@ -33,4 +35,4 @@ export const ServiceTypeDefs = gql`
         forgotPassword(email: String!): User
         changeUserAccountStatus(userId: ID!, accountStatus: String!): User
     }
-`
+`;

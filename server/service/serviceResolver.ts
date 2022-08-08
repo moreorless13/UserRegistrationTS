@@ -92,6 +92,7 @@ const ServiceResolvers = {
                     throw new AuthenticationError('User already exists')
                 } else {
                     const newUser = await User.create({ username, email, password });
+                    console.log(newUser)
                     sendConfirmationEmail(username, email, newUser._id);
                     return newUser
                 }
@@ -166,6 +167,20 @@ const ServiceResolvers = {
                 console.error(error)  
             }
         },
+        changeUserAccountStatus: async (parent: unknown, { userId, accountStatus }: any, context: any) => {
+            try {
+                if (context.user) {
+                    const user = await User.findById({ _id: context.user.data._id });
+                    if (user?.role !== 'Admin') {
+                        throw new AuthenticationError('You are not authorized to change account status')
+                    }
+                    const updatedUser = await User.findByIdAndUpdate({ _id: userId }, { $set: { accountStatus } }, { new: true });
+                    return updatedUser
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }
 }
 

@@ -3,14 +3,12 @@ import nodemailer from 'nodemailer';
 import sanitizedConfig from '../config';
 export const sendConfirmationEmail = (username: string, email: string, userId: Types.ObjectId) => {
     const transporter = nodemailer.createTransport({
-        host: sanitizedConfig.HOST,
-        port: sanitizedConfig.TRANSPORTPORT,
-        secure: false,
+        host: 'smtp.ethereal.email',
+        port: 587,
         auth: {
-            user: sanitizedConfig.USER,
-            pass: sanitizedConfig.PASS
-        },
-        logger: true
+            user: 'giovani.lindgren20@ethereal.email',
+            pass: '81GCHve5gaBMEK55vp'
+        }
     });
     console.log('Sending confirmation email....');
     transporter.sendMail({
@@ -28,6 +26,9 @@ export const sendForgotPasswordEmail = (email: string, userId: Types.ObjectId) =
     const transporter = nodemailer.createTransport({
         host: sanitizedConfig.HOST,
         port: sanitizedConfig.TRANSPORTPORT,
+        tls: {
+            rejectUnauthorized: true,
+        },
         secure: false,
         auth: {
             user: sanitizedConfig.USER,

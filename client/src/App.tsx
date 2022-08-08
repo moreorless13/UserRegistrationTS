@@ -4,6 +4,8 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import HomePage from './pages/Home';
+import AllUsers from './pages/AllUsers';
+import ConfirmationSuccess from './pages/ConfirmationSuccess';
 const cookies = new Cookies();
 
 const httpLink = createHttpLink({
@@ -33,6 +35,9 @@ const App = () => {
         <div className='container-fluid'>
           <Switch>
             <Route exact path='/' component={HomePage} />
+            <Route exact path='/users' component={AllUsers} />
+            <Route exact path='/confirm/:userId' component={ConfirmationSuccess} />
+
           </Switch>
 
         </div>

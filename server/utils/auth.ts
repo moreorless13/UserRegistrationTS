@@ -11,6 +11,7 @@ export const authMiddleware = async ({ req }: any) => {
     if (req.headers.authorization) {
         token = token.split(' ').pop().trim();
     }
+    console.log(token);
 
     if (!token) {
         return req
@@ -19,6 +20,7 @@ export const authMiddleware = async ({ req }: any) => {
     try {
         const data = jwt.verify(token, secret, { maxAge: expiration })
         req.user = data;
+        console.log(req.user);
     } catch (error) {
         console.log(error, 'Invalid Token');
     }
